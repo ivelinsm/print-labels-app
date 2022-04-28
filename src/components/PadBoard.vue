@@ -1,7 +1,7 @@
 <template>
   <div class="padboard d-flex justify-content-center container row text-center">
     <h1 class="text-center">PadBoard</h1>
-    <div v-for="(drink, index) in drinks" :key="index" class="card bg-white col-lg-2">
+    <div v-for="(drink, index) in drinks" :key="index" class="card col-md-2">
       <div class="card-body">
         <h5 class="card-title" :style="drink.counter ? 'background-color: tomato; border-radius: 5px' : ''">{{drink.name}}</h5>
         <div class="d-flex button-group justify-content-center">
@@ -75,7 +75,7 @@ h1 {
 
 input{
   width: 2rem;
-  margin: 0px 4px;
+  margin: 0px 8px;
   -moz-appearance: textfield;
 }
 
@@ -86,6 +86,6 @@ input::-webkit-inner-spin-button {
 }
 
 .button {
-  width: 44px;
+  width: 50%;
 }
 </style>
