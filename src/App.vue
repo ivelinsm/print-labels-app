@@ -22,7 +22,7 @@ export default {
   },
   data() {
     return {
-      drinks: drinksData,
+      drinks: drinksData.sort((a,b) => a.name > b.name),
     };
   },
 };
