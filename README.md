@@ -1,7 +1,7 @@
 # etiketi-koncentrati
 
 ## Deployment
-(Check the deployment here)[https://ivelinsm.github.io/print-labels-app/]
+[Check the deployment here](https://ivelinsm.github.io/print-labels-app/)
 
 ## Project setup
 ```
