@@ -1,9 +1,9 @@
 <template>
   <div class="padboard d-flex justify-content-center container row text-center">
-    <h1 class="text-center">PadBoard</h1>
+    <h1 class="text-center">Видове (Общ брой: {{ totalCounter }})</h1>
     <div v-for="(drink, index) in drinks" :key="index" class="card col-md-2">
       <div class="card-body">
-        <h5 class="card-title" :style="drink.counter ? 'background-color: tomato; border-radius: 5px' : ''">{{drink.name}}</h5>
+        <h5 class="card-title" :style="drink.counter ? 'background-color: palegreen; border-radius: 3px' : ''">{{drink.name}}</h5>
         <div class="d-flex button-group justify-content-center">
         <button @click="decreaseCounter(index)" type="button" class="btn btn-primary btn-sm fw-bold col-3">-</button>
         <input @input="inputChange" class="bg-white" type="number" v-model.number='drink.counter' min=0 max=4/>
@@ -26,8 +26,10 @@ export default {
     drinks: Array
   },
   computed: {
-    titleBg(drink) {
-        if(drink.counter) return 'background: yellow'
+    totalCounter() {
+      let totalNum = 0;
+      this.drinks.forEach(drink => totalNum+=drink.counter);
+      return totalNum;
     }
   },
   methods: {
@@ -46,7 +48,7 @@ export default {
     },
 
     inputChange(event) {
-      console.log('Input changed :' + event)
+      // console.log('Input changed :' + event)
     }
   }
 }
@@ -58,13 +60,24 @@ h1 {
 }
 
 .card {
-  margin: 12px;
+  margin: 6px 10px;
+}
+
+.card:hover .btn-secondary {
+  /* background-color: rgba(255, 255, 255, 0.808); */
+  visibility: visible !important;
+
 }
 
 .card-body {
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
+
+.card-title {
+  font-size: 16px;
+  padding: 2px 0px;
 }
 
 .info {
@@ -74,8 +87,9 @@ h1 {
 }
 
 input{
-  width: 2rem;
+  width: 1.8rem;
   margin: 0px 8px;
+  text-align: center;
   -moz-appearance: textfield;
 }
 
@@ -87,5 +101,14 @@ input::-webkit-inner-spin-button {
 
 .button {
   width: 50%;
+}
+
+.btn-secondary {
+  align-self: center;
+  width: 40%;
+  padding: 0;
+  font-size: 10px;
+  height: 1rem;
+  visibility: hidden;
 }
 </style>

@@ -1,17 +1,13 @@
 <template>
-<Fragment>
-  <h1>A4 - Предварителен преглед</h1>
+  <Fragment>
+    <h1>A4 - Предварителен преглед</h1>
     <div class="page">
-      <div
-        v-for="(drink, index) in printableDrinks(drinks)"
-        class="mycard"
-        :key="index"
-      >
+      <div v-for="(drink, index) in printableDrinks(drinks)" class="mycard" :key="index">
         <span class="title">КОНЦЕНТРАТ {{ drink.name.toUpperCase() }}</span>
         <p class="body">{{ drink.content }}</p>
       </div>
     </div>
-    </Fragment>
+  </Fragment>
 </template>
 
 <script>
@@ -32,11 +28,9 @@ export default {
         if (drink.counter > 0) {
           for (let i = 0; i < drink.counter; i++) {
             result.push(drink);
-            console.log(drink);
           }
         }
       });
-      console.log(result);
       return result;
     },
   },
@@ -61,7 +55,7 @@ export default {
   gap: 10px;
 }
 
-header{
+header {
   font-size: 42px;
   margin: 30px;
 }
@@ -79,7 +73,7 @@ header{
 }
 
 .body {
-  margin-top:3px;
+  margin-top: 3px;
   font-size: 8px;
 }
 </style>
