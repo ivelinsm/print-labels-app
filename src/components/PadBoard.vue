@@ -1,8 +1,6 @@
 <template>
   <div class="padboard d-flex justify-content-center container row text-center">
-    <div class="text-container">
-    <h1 class="text-center">Видове (Общ брой: {{ totalCounter }})</h1><span id="version">v24/04/30</span>
-    </div>
+    <h1 class="text-center">Видове (Общ брой: {{ totalCounter }})</h1>
     <div v-for="(drink, index) in drinks" :key="index" class="card col-md-2">
       <div class="card-body">
         <h5 class="card-title" :style="drink.counter ? 'background-color: palegreen; border-radius: 3px' : ''">{{drink.name}}</h5>
@@ -57,12 +55,6 @@ export default {
 </script>
 
 <style scoped>
-.text-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 h1 {
   margin: 30px;
 }
@@ -118,9 +110,5 @@ input::-webkit-inner-spin-button {
   font-size: 10px;
   height: 1rem;
   visibility: hidden;
-}
-
-#version {
-  font-size: 10px;
 }
 </style>
