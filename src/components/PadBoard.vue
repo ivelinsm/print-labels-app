@@ -19,39 +19,35 @@
   </div>
 </template>
  
-<script>
-export default {
-  name: 'PadBoard',
-  props: {
-    drinks: Array
-  },
-  computed: {
-    totalCounter() {
-      let totalNum = 0;
-      this.drinks.forEach(drink => totalNum+=drink.counter);
-      return totalNum;
-    }
-  },
-  methods: {
-    decreaseCounter(index) {
-      if(this.drinks[index].counter<=0) return;
+<script setup>
+import { computed } from 'vue'
 
-      this.drinks[index].counter -= 1;
-    },
+const props = defineProps({
+  drinks: Array
+})
 
-    increaseCounter(index) {
-      this.drinks[index].counter += 1;
-    },
+const totalCounter = computed(() => {
+  let totalNum = 0;
+  props.drinks.forEach(drink => totalNum += drink.counter);
+  return totalNum;
+});
 
-    resetCounter(index) {
-      this.drinks[index].counter = 0;
-    },
+const decreaseCounter = (index) => {
+  if(props.drinks[index].counter <= 0) return;
+  props.drinks[index].counter -= 1;
+};
 
-    inputChange(event) {
-      // console.log('Input changed :' + event)
-    }
-  }
-}
+const increaseCounter = (index) => {
+  props.drinks[index].counter += 1;
+};
+
+const resetCounter = (index) => {
+  props.drinks[index].counter = 0;
+};
+
+const inputChange = (event) => {
+  // console.log('Input changed :' + event)
+};
 </script>
 
 <style scoped>
@@ -90,6 +86,7 @@ input{
   width: 1.8rem;
   margin: 0px 8px;
   text-align: center;
+  appearance: textfield;
   -moz-appearance: textfield;
 }
 

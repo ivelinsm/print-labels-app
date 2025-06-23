@@ -5,27 +5,15 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref } from 'vue'
 import PadBoard from "./components/PadBoard.vue";
 import Preview from "./components/Preview.vue";
 import { drinksData } from "./components/Helpers/Drinks";
-import { Fragment } from "vue-frag";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
 
-export default {
-  name: "App",
-  components: {
-    PadBoard,
-    Preview,
-    Fragment,
-  },
-  data() {
-    return {
-      drinks: drinksData.sort((a,b) => a.name > b.name),
-    };
-  },
-};
+const drinks = ref(drinksData.sort((a,b) => a.name > b.name));
 </script>
 
 <style>

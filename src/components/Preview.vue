@@ -1,39 +1,28 @@
 <template>
-  <Fragment>
-    <h1>A4 - Предварителен преглед</h1>
-    <div class="page">
-      <div v-for="(drink, index) in printableDrinks(drinks)" class="mycard" :key="index">
-        <span class="title">КОНЦЕНТРАТ {{ drink.name.toUpperCase() }}</span>
-        <p class="body">{{ drink.content }}</p>
-      </div>
+  <h1>A4 - Предварителен преглед</h1>
+  <div class="page">
+    <div v-for="(drink, index) in printableDrinks(drinks)" class="mycard" :key="index">
+      <span class="title">КОНЦЕНТРАТ {{ drink.name.toUpperCase() }}</span>
+      <p class="body">{{ drink.content }}</p>
     </div>
-  </Fragment>
+  </div>
 </template>
 
-<script>
-import { Fragment } from 'vue-frag';
+<script setup>
+const props = defineProps({
+  drinks: Array,
+})
 
-export default {
-  name: "Preview",
-  components: {
-    Fragment
-  },
-  props: {
-    drinks: Array,
-  },
-  methods: {
-    printableDrinks: function (drinks) {
-      let result = [];
-      drinks.forEach((drink) => {
-        if (drink.counter > 0) {
-          for (let i = 0; i < drink.counter; i++) {
-            result.push(drink);
-          }
-        }
-      });
-      return result;
-    },
-  },
+const printableDrinks = (drinks) => {
+  let result = [];
+  drinks.forEach((drink) => {
+    if (drink.counter > 0) {
+      for (let i = 0; i < drink.counter; i++) {
+        result.push(drink);
+      }
+    }
+  });
+  return result;
 };
 </script>
 
