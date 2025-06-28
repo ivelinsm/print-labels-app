@@ -213,7 +213,9 @@ export const useProductsStore = defineStore("products", () => {
     const activeCategory = reactive({ value: CATEGORIES.CONCENTRATE });
 
     // --- getters -------------------------------------------------------------
-    const activeItems = computed(() => catalogue[activeCategory.value]);
+    const activeItems = computed(() => 
+        [...catalogue[activeCategory.value]].sort((a, b) => a.label.localeCompare(b.label))
+    );
 
     const total = computed(() =>
         activeItems.value.reduce((s, p) => s + counts[p.id], 0)
