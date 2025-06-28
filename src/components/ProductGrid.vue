@@ -76,9 +76,9 @@ const handleClick = (category) => {
 .toggle-wrapper {
     display: inline-flex;
     gap: 4px;
-    background-color: #f3f4f6;
+    background-color: #e2e2e2;
     border-radius: 8px;
-    padding: 3px;
+    padding: 4px;
 }
 
 .toggle-button {
@@ -86,14 +86,14 @@ const handleClick = (category) => {
     border: none;
     background-color: transparent;
     cursor: pointer;
-    font-weight: 300;
+    font-weight: 400;
     font-size: 24px;
-    opacity: 0.8;
+    opacity: 0.6;
     color: #374151;
     transition: background-color 0.2s;
+    border-radius: 6px;
 
     &.active {
-        font-weight: 400;
         opacity: 1;
     }
 }
@@ -101,6 +101,7 @@ const handleClick = (category) => {
 .toggle-button:hover {
     background-color: #ffffff;
     border-radius: 6px;
+    opacity: 1;
 }
 
 .toggle-button.active {
