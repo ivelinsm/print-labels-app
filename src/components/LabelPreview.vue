@@ -19,7 +19,7 @@
                 'slushy-label': store.activeCategory.value === store.CATEGORIES.SLUSHY,
                 'concentrate-label': store.activeCategory.value === store.CATEGORIES.CONCENTRATE
             }" 
-            class="border px-1 py-1 flex flex-col justify-between break-inside-avoid">
+            class="px-1 py-1 flex flex-col justify-between break-inside-avoid">
             <header :class="{
                 'slushy-label-header': store.activeCategory.value === store.CATEGORIES.SLUSHY,
                 'concentrate-label-header': store.activeCategory.value === store.CATEGORIES.CONCENTRATE
