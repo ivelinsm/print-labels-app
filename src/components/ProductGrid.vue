@@ -23,7 +23,7 @@
             <li v-for="item in items" :key="item.id"
                 class="rounded-lg border p-3 flex flex-col gap-2 bg-white shadow-sm"
                 :class="{ 'active': store.counts[item.id] > 0 }">
-                <h3 class="font-semibold text-center">{{ item.label }} {{ item.emoji }}</h3>
+                <h3 class="font-semibold text-center">{{ item.label }} <span class="text-xl">{{ item.emoji }}</span></h3>
                 <div class="flex items-center justify-center gap-2">
                     <button
                         class="items-center px-2 py-1 rounded bg-red-500 text-white hover:bg-red-600 disabled:opacity-30"
@@ -57,10 +57,10 @@ const store = useProductsStore();
 const total = computed(() => store.total);
 const items = computed(() => store.activeItems);
 const fullPageCount = computed(() => {
-    return store.activeCategory.value === store.CATEGORIES.CONCENTRATE ? 24 : 12;
+    return store.activeCategory.value === store.CATEGORIES.CONCENTRATE ? 24 : 14;
 });
 const incrementByTitle = computed(() => {
-    return store.activeCategory.value === store.CATEGORIES.CONCENTRATE ? 'Добави 24' : 'Добави 12';
+    return store.activeCategory.value === store.CATEGORIES.CONCENTRATE ? 'Добави 24' : 'Добави 14';
 });
 
 const handleClick = (category) => {

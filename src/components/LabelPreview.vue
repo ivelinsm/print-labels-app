@@ -5,7 +5,7 @@
             📄 Страницата е пълна!
         </span>
         <span v-else class="ml-2">
-            ({{ store.labelsOnCurrentPage }}/{{ store.activeCategory.value === store.CATEGORIES.CONCENTRATE ? 24 : 12 }}
+            ({{ store.labelsOnCurrentPage }}/{{ store.activeCategory.value === store.CATEGORIES.CONCENTRATE ? 24 : 14 }}
             етикета на текущата страница)
         </span>
     </div>
@@ -13,7 +13,7 @@
                 'slushy-wrapper': store.activeCategory.value === store.CATEGORIES.SLUSHY,
                 'concentrate-wrapper': store.activeCategory.value === store.CATEGORIES.CONCENTRATE
             }" 
-        class="screen-sheet print-sheet border rounded bg-white p-4 grid gap-4" :style="gridStyle">
+        class="screen-sheet print-sheet border rounded bg-white p-4 grid gap-4 gap-y-5" :style="gridStyle">
         <div v-for="(label, i) in labels" :key="`${label.id}-${i}`"
             :class="{
                 'slushy-label': store.activeCategory.value === store.CATEGORIES.SLUSHY,
@@ -25,7 +25,7 @@
                 'concentrate-label-header': store.activeCategory.value === store.CATEGORIES.CONCENTRATE
             }" class=" font-semibold">
                 {{ store.activeCategory.value === store.CATEGORIES.CONCENTRATE ? 'КОНЦЕНТРАТ' : 'Ароматна смес за скрежина - ' }}
-                {{ label.label.toUpperCase() }}
+                <span class="font-bold">{{ label.label.toUpperCase() }}</span>
             </header>
 
             <section :class="{
