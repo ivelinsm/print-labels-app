@@ -5,7 +5,7 @@
             📄 Страницата е пълна!
         </span>
         <span v-else class="ml-2">
-            ({{ store.labelsOnCurrentPage }}/{{ store.activeCategory.value === store.CATEGORIES.CONCENTRATE ? 24 : 14 }}
+            ({{ store.labelsOnCurrentPage }}/{{ store.activeCategory.value === store.CATEGORIES.CONCENTRATE ? 24 : 12 }}
             етикета на текущата страница)
         </span>
     </div>
@@ -71,8 +71,9 @@ const gridStyle = computed(() => ({
     gap: 4px;
 }
 
-.slushy-label {
-
+.slushy-label:nth-child(12n + 13), .slushy-label:nth-child(12n + 14)  {
+    margin-top: 10mm;
+    /* Add space between pages */   
 }
 
 .concentrate-label {

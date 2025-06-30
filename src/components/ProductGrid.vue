@@ -57,10 +57,10 @@ const store = useProductsStore();
 const total = computed(() => store.total);
 const items = computed(() => store.activeItems);
 const fullPageCount = computed(() => {
-    return store.activeCategory.value === store.CATEGORIES.CONCENTRATE ? 24 : 14;
+    return store.activeCategory.value === store.CATEGORIES.CONCENTRATE ? 24 : 12;
 });
 const incrementByTitle = computed(() => {
-    return store.activeCategory.value === store.CATEGORIES.CONCENTRATE ? 'Добави 24' : 'Добави 14';
+    return store.activeCategory.value === store.CATEGORIES.CONCENTRATE ? 'Добави 24' : 'Добави 12';
 });
 
 const handleClick = (category) => {
