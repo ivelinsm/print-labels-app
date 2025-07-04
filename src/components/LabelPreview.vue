@@ -5,16 +5,27 @@
             📄 Страницата е пълна!
         </span>
         <span v-else class="ml-2">
-            ({{ store.labelsOnCurrentPage }}/{{ store.activeCategory.value === store.CATEGORIES.CONCENTRATE ? 24 : 12 }}
+            ({{ store.labelsOnCurrentPage }}/{{ labelsPerPage }}
             етикета на текущата страница)
         </span>
     </div>
-    <div :class="{
-                'slushy-wrapper': store.activeCategory.value === store.CATEGORIES.SLUSHY,
-                'concentrate-wrapper': store.activeCategory.value === store.CATEGORIES.CONCENTRATE
-            }" 
-        class="screen-sheet print-sheet border rounded bg-white p-4 grid gap-4 gap-y-5" :style="gridStyle">
-        <div v-for="(label, i) in labels" :key="`${label.id}-${i}`"
+    
+    <!-- Multiple pages with automatic pagination -->
+    <div v-for="(pageLabels, pageIndex) in paginatedLabels" :key="`page-${pageIndex}`"
+         :class="{
+            'slushy-wrapper': store.activeCategory.value === store.CATEGORIES.SLUSHY,
+            'concentrate-wrapper': store.activeCategory.value === store.CATEGORIES.CONCENTRATE
+         }" 
+         class="screen-sheet print-sheet border rounded bg-white p-4 grid gap-4 gap-y-5" 
+         :style="gridStyle">
+        
+        <!-- Page number indicator (hidden on print) -->
+        <div v-if="store.totalPages > 1" class="col-span-full text-xs text-gray-500 text-center hide-on-print">
+            Страница {{ pageIndex + 1 }} от {{ store.totalPages }}
+        </div>
+        
+        <!-- Labels for this page -->
+        <div v-for="(label, labelIndex) in pageLabels" :key="`${label.id}-${pageIndex}-${labelIndex}`"
             :class="{
                 'slushy-label': store.activeCategory.value === store.CATEGORIES.SLUSHY,
                 'concentrate-label': store.activeCategory.value === store.CATEGORIES.CONCENTRATE
@@ -54,6 +65,24 @@ const labels = computed(() =>
     store.activeItems.flatMap(p => Array.from({ length: store.counts[p.id] }, () => p)),
 );
 
+// Calculate labels per page based on category
+const labelsPerPage = computed(() => 
+    store.activeCategory.value === store.CATEGORIES.CONCENTRATE ? 24 : 12
+);
+
+// Split labels into pages for pagination
+const paginatedLabels = computed(() => {
+    const allLabels = labels.value;
+    const perPage = labelsPerPage.value;
+    const pages = [];
+    
+    for (let i = 0; i < allLabels.length; i += perPage) {
+        pages.push(allLabels.slice(i, i + perPage));
+    }
+    
+    return pages;
+});
+
 // Dynamic columns controlled by the "labels per row" setting
 const gridStyle = computed(() => ({
     gridTemplateColumns: `repeat(${store.labelsPerRow.value}, 1fr)`,
@@ -64,7 +93,7 @@ const gridStyle = computed(() => ({
 /* Base styles for labels */
 
 .slushy-wrapper {
-    
+    /* Spacing for slushy labels */
 }
 
 .concentrate-wrapper {
@@ -72,12 +101,12 @@ const gridStyle = computed(() => ({
 }
 
 .slushy-label:nth-child(12n + 13), .slushy-label:nth-child(12n + 14)  {
-    margin-top: 10mm;
+    /* margin-top: 10mm; */
     /* Add space between pages */   
 }
 
 .concentrate-label {
-    
+    /* Concentrate label styles */
 }
 
 .slushy-label-header {
@@ -104,6 +133,12 @@ const gridStyle = computed(() => ({
     /* Add visual border to show the actual printable area */
     border: 1px solid #e5e7eb;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+/* Remove margin from last page */
+.screen-sheet:last-child {
+    margin-bottom: 0;
 }
 
 /* Print sheet – use the same dimensions as screen preview */
@@ -120,6 +155,15 @@ const gridStyle = computed(() => ({
         grid-auto-rows: max-content;
         border: none;
         box-shadow: none;
+        margin-bottom: 0;
+        break-after: page;
+        page-break-after: always;
+    }
+    
+    /* Don't add page break after the last page */
+    .print-sheet:last-child {
+        break-after: auto;
+        page-break-after: auto;
     }
 }
 </style>
